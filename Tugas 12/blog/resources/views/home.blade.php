@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome!</title>
-</head>
-<body>
+@extends('layouts.master')
+@section('title')
+Home Page 
+@endsection
+@section('content')
+
+
     <h1>SanberBook</h1>
 
 <h2>Social Media Developer Santai Berkualitas</h2>
@@ -26,5 +25,4 @@
         <li>Mendaftar di <a href="{{ route('register') }}">Form Sign Up</a></li>
         <li>Selesai!</li>
     </ol>
-</body>
-</html>
+@endsection
