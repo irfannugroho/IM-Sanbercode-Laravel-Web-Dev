@@ -1,44 +1,41 @@
 @extends('layouts.master')
 @section('title')
-Create Genres
+Tambah Genre - KataBuku
 @endsection
 
 @section('content')
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Create Genre</h4>
-                </div>
-                <div class="card-body">
-                    <form action="/genres" method="POST">
-                        @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+<section class="comment-form section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6"> 
+                <form action="{{ route('genres.store') }}" method="POST">
+                    @csrf
+
+                    <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo d-flex img-fluid justify-content-center mx-auto" style="height: 40px; margin-right: 10px;">
+                    <h2 class="text-center fw-bold mt-3">TAMBAH GENRE BUKU</h2>
+                    <p class="text-center mb-4">Silakan isi formulir berikut untuk menambahkan genre baru ke dalam sistem.</p>
+                    
+                    <div class="row">
+                        <div class="col form-group">
+                            <input name="name" type="text" id="books" class="form-control" placeholder="Nama Genre*" required>
                         </div>
-                        @endif
-                        @csrf
-                        <div class="mb-3">
-                            <label for="genre" class="form-label">Genre</label>
-                            <input type="text" class="form-control" id="genre" name="name" placeholder="Enter genre" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col form-group">
+                            <textarea name="description" class="form-control" placeholder="Deskripsi"></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter description" required></textarea>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ route('genres.index') }}" class="btn btn-danger">BATAL</a>
+                        <button type="submit" class="btn btn-primary">SIMPAN</button>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 @endsection

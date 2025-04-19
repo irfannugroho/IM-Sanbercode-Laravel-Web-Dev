@@ -41,16 +41,8 @@
   @include('partials.nav')
 
   <main class="main">
-
-
-
     <!-- Starter Section Section -->
     <section id="starter-section" class="starter-section section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>@yield('title')</h2>
-      </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up">
        @yield('content')

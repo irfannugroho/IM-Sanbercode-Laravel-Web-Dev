@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\books;
 
 
 class GenresController extends Controller
@@ -52,21 +53,22 @@ class GenresController extends Controller
 
     public function show($id)
     {
-        $genre = DB::table('genres')->where('id', $id)->first();
-        return view('genres.detail', ['genre' => $genre]);
+        $genres = DB::table('genres')->where('id', $id)->first();
+        $books = DB::table('books')->where('genres_id', $id)->get();
+        return view('genres.detail', ['genres' => $genres], ['books' => $books]);
     }
 
 
     public function edit($id)
     {
-        $genre = DB::table('genres')->where('id', $id)->first();
-        return view('genres.edit', ['genre' => $genre]);
+        $genres = DB::table('genres')->where('id', $id)->first();
+        return view('genres.edit', ['genres' => $genres]);
 
     }
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => ['required', 'string', 'min:5' , 'max:255'],
+            'name' => ['required', 'string', 'min:2' , 'max:255'],
             'description' => ['required', 'string', 'max:255'],
         ],
         [

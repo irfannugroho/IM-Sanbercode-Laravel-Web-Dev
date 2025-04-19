@@ -17,10 +17,13 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -32,6 +35,14 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * Relasi ke tabel profile
+     */
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id');
+    }
 
     /**
      * Get the attributes that should be cast.

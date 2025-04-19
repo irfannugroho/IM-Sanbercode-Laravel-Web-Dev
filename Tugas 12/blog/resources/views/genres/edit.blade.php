@@ -1,44 +1,41 @@
 @extends('layouts.master')
 @section('title')
-Edit Genre
+Edit Genre - {{$genres->name}} - KataBuku
 @endsection
 @section('content')
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Edit Genre</h4>
-                </div>
-                <div class="card-body">
-                    <form action="/genres/{{$genre->id}}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+
+
+<section class="comment-form section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6"> 
+                <form action="/genres/{{$genres->id}}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo d-flex img-fluid justify-content-center mx-auto" style="height: 40px; margin-right: 10px;">
+                    <h2 class="text-center fw-bold mt-3">EDIT GENRE BUKU</h2>
+                    <p class="text-center mb-4">Silakan isi formulir berikut untuk mengedit, simpan untuk merubah dan batal untuk kembali</p>
+                    
+                    <div class="row">
+                        <div class="col form-group">
+                            <input name="name" type="text" id="books" class="form-control" value="{{ $genres->name }}" required>
                         </div>
-                        @endif
-                        <div class="mb-3">
-                            <label for="genre" class="form-label">Genre</label>
-                            <input type="text" class="form-control" id="genre" name="name" value="{{ $genre->name }}" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col form-group">
+                            <textarea name="description" class="form-control" placeholder="Deskripsi">{{ old('description', $genres->description) }}<</textarea>
                         </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="4" required>{{ $genre->description }}</textarea>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                            <a href="/genres" class="btn btn-secondary">Cancel</a>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ route('genres.index') }}" class="btn btn-danger">BATAL</a>
+                        <button type="submit" class="btn btn-primary">SIMPAN</button>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
-</div>
 @endsection

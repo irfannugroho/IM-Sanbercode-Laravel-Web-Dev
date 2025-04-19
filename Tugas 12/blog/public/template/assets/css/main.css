@@ -61,6 +61,13 @@
   --contrast-color: #ffffff;
 }
 
+.blur-background {
+  position: relative;
+  --background-color: #d0d0ce; /* Warna semi-transparan */
+  backdrop-filter: blur(10px); /* Efek blur */
+  -webkit-backdrop-filter: blur(10px); /* Untuk browser berbasis WebKit */
+}
+
 /* Smooth scroll */
 :root {
   scroll-behavior: smooth;
@@ -744,11 +751,39 @@ h6 {
 /*--------------------------------------------------------------
 # Global Sections
 --------------------------------------------------------------*/
+
+.btn-primary {
+  border-radius: 4px;
+  padding: 10px 20px;
+  border: 0;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  font-family: var(--nav-font)
+}
+
+.btn-primary:hover {
+  color: var(--contrast-color);
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+}
+
+.btn-danger {
+  border-radius: 4px;
+  padding: 10px 20px;
+  border: 0;
+  background-color: #ef233c;
+  color: var(--contrast-color);
+  font-family: var(--nav-font)
+}
+
+.btn-danger:hover {
+  color: var(--contrast-color);
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+}
 section,
 .section {
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 60px 0;
+  padding: 30px 0;
   scroll-margin-top: 100px;
   overflow: clip;
 }
@@ -766,12 +801,11 @@ section,
 --------------------------------------------------------------*/
 .section-title {
   text-align: center;
-  padding-bottom: 60px;
   position: relative;
 }
 
 .section-title h2 {
-  font-size: 32px;
+  font-size: 22px;
   font-weight: 700;
   margin-bottom: 20px;
   text-transform: uppercase;
@@ -792,10 +826,22 @@ section,
   margin: auto;
 }
 
-.section-title p {
+.section-title p, .section-title a {
+  display: inline;
+  margin-right: 10px;
   margin-bottom: 0;
+  font-weight: 300;
+  font-size: 17px;
 }
 
+.section-title a {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+.section-title a:hover {
+  color: color-mix(in srgb, var(--accent-color), transparent 20%);
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -1525,9 +1571,10 @@ section,
   background-color: var(--surface-color);
   display: flex;
   align-items: center;
+  text-transform: uppercase;
   padding: 20px;
   transition: 0.3s;
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 60%);
   position: relative;
 }
 
@@ -1535,14 +1582,15 @@ section,
   font-size: 32px;
   padding-right: 10px;
   line-height: 0;
+  opacity: 0;
 }
 
 .features .features-item h3 {
-  font-weight: 700;
+  font-weight: 600;
   margin: 0;
   padding: 0;
   line-height: 1;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .features .features-item h3 a {
@@ -1552,9 +1600,14 @@ section,
 
 .features .features-item:hover {
   border-color: var(--accent-color);
+  background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
 }
 
-.features .features-item:hover h3 a {
+.features .features-item:hover i {
+ opacity: 1;
+}
+
+.features .features-item:hover h3 a i{
   color: var(--accent-color);
 }
 
@@ -1949,6 +2002,8 @@ section,
 
 .blog-posts .post-img img {
   transition: 0.5s;
+  z-index: 1; 
+    position: relative; 
 }
 
 .blog-posts .post-date {
@@ -2016,6 +2071,77 @@ section,
 
 .blog-posts article:hover .post-img img {
   transform: scale(1.1);
+}
+
+/* Konsistensi ukuran kartu */
+.blog-posts .col {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-posts article {
+  height: 100%; /* Pastikan semua kartu memiliki tinggi penuh */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Jaga jarak antar elemen */
+  padding: 15px; /* Tambahkan padding untuk konsistensi */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambahkan shadow */
+  border-radius: 8px; /* Tambahkan radius */
+  background-color: #ffffff; /* Warna background */
+}
+
+.blog-posts .post-img {
+  height: 200px; /* Tetapkan tinggi tetap untuk gambar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px; /* Tambahkan radius untuk gambar */
+}
+
+.blog-posts .post-img img {
+  max-height: 100%;
+  object-fit: cover; /* Pastikan gambar sesuai dengan area */
+  width: 100%; /* Pastikan gambar memenuhi lebar */
+}
+
+.blog-posts .post-content {
+  flex-grow: 1; /* Isi ruang yang tersisa */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 10px; /* Tambahkan jarak atas */
+}
+
+.blog-posts .post-title {
+  font-size: 18px; /* Ukuran font konsisten */
+  font-weight: 600; /* Tebal font */
+  color: #333; /* Warna teks */
+  margin-bottom: 10px; /* Tambahkan jarak bawah */
+  text-align: center; /* Pusatkan teks */
+}
+
+.blog-posts p {
+  font-size: 14px; /* Ukuran font untuk teks */
+  color: #666; /* Warna teks */
+  line-height: 1.5; /* Jarak antar baris */
+  text-align: justify; /* Rata kanan-kiri */
+}
+
+.blog-posts .readmore {
+  margin-top: auto; /* Posisikan tombol di bagian bawah */
+  font-size: 14px; /* Ukuran font tombol */
+  font-weight: 600; /* Tebal font */
+  color: var(--accent-color); /* Warna tombol */
+  text-align: center; /* Pusatkan teks */
+  text-decoration: none; /* Hilangkan garis bawah */
+  transition: all 0.3s ease; /* Animasi hover */
+}
+
+.blog-posts .readmore:hover {
+  color: #ffffff; /* Warna teks saat hover */ /* Warna background saat hover */
+  padding: 5px 10px; /* Tambahkan padding saat hover */
+  border-radius: 4px; /* Tambahkan radius */
 }
 
 /*--------------------------------------------------------------
@@ -2274,13 +2400,15 @@ section,
 --------------------------------------------------------------*/
 .comment-form {
   padding-top: 10px;
+  border-radius: 12px;
 }
 
 .comment-form form {
   background-color: var(--surface-color);
   margin-top: 30px;
   padding: 30px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
 }
 
 .comment-form form h4 {
@@ -2462,7 +2590,6 @@ section,
 # Starter Section Section
 --------------------------------------------------------------*/
 
-
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
@@ -2631,4 +2758,644 @@ section,
   padding-left: 5px;
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
+}
+
+.navbar-brand img {
+            height: 30px;
+        }
+        .search-input {
+            width: 400px;
+        }
+        .featured-section {
+            background-color: #f8f2f7;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            padding: 20px;
+            position: relative;
+        }
+        .featured-image {
+            max-width: 200px;
+            position: absolute;
+            right: 20px;
+            bottom: 0;
+        }
+        .book-card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .book-img-container {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .book-img-container img {
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .book-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .book-author {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .book-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+        .discount-label {
+            background-color: #f8d7da;
+            color: #dc3545;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+        .original-price {
+            font-size: 12px;
+            color: #6c757d;
+            text-decoration: line-through;
+        }
+        .wishlist-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .view-all {
+            font-size: 14px;
+            color: #0d6efd;
+        }
+
+        /* landing page books */
+        .navbar-brand img {
+          height: 30px;
+      }
+      .search-input {
+          width: 400px;
+      }
+      .featured-section {
+          background-color: #f8f2f7;
+          border-radius: 12px;
+          margin-bottom: 30px;
+          padding: 20px;
+          position: relative;
+      }
+      .featured-image {
+          max-width: 200px;
+          position: absolute;
+          right: 20px;
+          bottom: 0;
+      }
+      .book-card {
+          transition: transform 0.3s;
+          height: 100%;
+      }
+      .book-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .book-img-container {
+          height: 200px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+      .book-img-container img {
+          max-height: 100%;
+          object-fit: contain;
+      }
+      .book-title {
+          font-size: 14px;
+          font-weight: 600;
+          margin-bottom: 2px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+      }
+      .book-author {
+          font-size: 12px;
+          color: #6c757d;
+          margin-bottom: 10px;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+      }
+      .book-price {
+          font-size: 16px;
+          font-weight: 700;
+          color: #333;
+      }
+      .discount-label {
+          background-color: #f8d7da;
+          color: #dc3545;
+          font-size: 12px;
+          padding: 2px 6px;
+          border-radius: 4px;
+          margin-left: 5px;
+      }
+      .original-price {
+          font-size: 12px;
+          color: #6c757d;
+          text-decoration: line-through;
+      }
+      .wishlist-btn {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          background-color: white;
+          border: none;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .section-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+      }
+      .section-title {
+          font-size: 24px;
+          font-weight: 700;
+      }
+      .view-all {
+          font-size: 14px;
+          color: #0d6efd;
+      }
+
+      
+/* Auth */
+
+.login-card {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.login-card-img {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.sitename-auth {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.1rem;
+}
+
+.login-card-description {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.text-muted {
+  font-size: 0.8rem;
+}
+      
+/* auth responsive */
+@media (max-width: 768px) {
+  .login-card {
+      max-width: 100%;
+  }
+
+  .login-card-img {
+      display: none;
+  }
+
+  .card-body {
+      padding: 2rem;
+  }
+}
+
+/* Profile Card */
+
+.profile-padding {
+  padding: 3rem !important
+}
+
+.user-card-full {
+  overflow: hidden;
+}
+
+.profile-card {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+  border: none;
+  margin-bottom: 30px;
+}
+
+.m-r-0 {
+  margin-right: 0px;
+}
+
+.m-l-0 {
+  margin-left: 0px;
+}
+
+.user-card-full .user-profile {
+  border-radius: 5px 0 0 5px;
+}
+
+.bg-c-lite-green {
+  background: linear-gradient(to left, #1bbd36, #2ae149 ); 
+}
+
+.user-profile {
+  padding: 20px 0;
+}
+
+.card-block {
+  padding: 1.25rem;
+}
+
+.m-b-25 {
+  margin-bottom: 25px;
+}
+
+.img-radius {
+  border-radius: 5px;
+}
+
+
+
+h6 {
+  font-size: 14px;
+}
+
+.card .card-block p {
+  line-height: 25px;
+}
+
+@media only screen and (min-width: 1400px){
+p {
+  font-size: 14px;
+}
+}
+
+.card-block {
+  padding: 1.25rem;
+}
+
+.b-b-default {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.p-b-5 {
+  padding-bottom: 5px !important;
+}
+
+.card .card-block p {
+  line-height: 25px;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+.profile-text-muted {
+  color: #919aa3 !important;
+}
+
+.b-b-default {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.f-w-600 {
+  font-weight: 600;
+}
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.m-t-40 {
+  margin-top: 20px;
+}
+
+.p-b-5 {
+  padding-bottom: 5px !important;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+.m-t-40 {
+  margin-top: 20px;
+}
+
+.user-card-full .social-link li {
+  display: inline-block;
+}
+
+.user-card-full .social-link li a {
+  font-size: 20px;
+  margin: 0 10px 0 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.blog-jumbotron{
+  background-color: #1bbd36;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+}
+
+.jumbotron-blog-image {
+  max-width: 520px;
+  position: absolute;
+  right: 20px;
+  bottom: -45px;
+}
+
+.close-btn {
+  z-index: 10; 
+  top: 20px; 
+  right: 20px; 
+  position: absolute; 
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white; /* Warna background putih */
+  border-radius: 50%; /* Membuat ikon berbentuk lingkaran */
+  padding: 10px; /* Memberikan ruang di sekitar ikon */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Memberikan efek bayangan */
+  text-decoration: none; /* Menghapus garis bawah pada link *//* Menggunakan warna teks bawaan */
+  width: 40px; /* Lebar lingkaran */
+  height: 40px; /* Tinggi lingkaran */
+}
+
+.icon-btn i {
+  font-size: 18px; /* Ukuran ikon */
+}
+
+.genre-detail {
+  padding-top: 10px;
+  border-radius: 12px;
+  margin-top: 30px;
+  padding: 30px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+}
+
+.genre-box {
+  padding-top: 10px;
+  border-radius: 12px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  padding: 30px;
+}
+
+
+.carousel {
+    margin-top: 24px;
+    
+}
+
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 2px;
+    border-radius: 15px;
+    color: var(--contrast-color);
+    font-family: var(--heading-font);
+    opacity: 0; /* Sembunyikan caption secara default */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.carousel-caption h5 {
+    font-weight: 600;
+    color: var(--contrast-color);
+}
+
+.carousel-item img:hover + .carousel-caption {
+  opacity: 1; 
+}
+
+@media (max-width: 768px) {
+  .carousel-item img {
+      height: 250px; /* Kurangi tinggi gambar untuk layar kecil */
+  }
+
+  .carousel-caption {
+      font-size: 14px; /* Kurangi ukuran font untuk layar kecil */
+      padding: 5px;
+  }
+
+  .carousel-caption h5 {
+      font-size: 16px; /* Kurangi ukuran heading */
+  }
+
+  .carousel-caption p {
+      font-size: 12px; /* Kurangi ukuran paragraf */
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-item img {
+      height: 200px; /* Kurangi tinggi gambar lebih kecil */
+  }
+
+  .carousel-caption {
+      font-size: 12px;
+  }
+
+  .carousel-caption h5 {
+      font-size: 14px;
+  }
+
+  .carousel-caption p {
+      font-size: 10px;
+  }
+}
+
+/* Styling untuk favorite-books */
+.favorite-books .card {
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Tambahkan border tipis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Kurangi shadow */
+  border-radius: 12px; /* Sesuaikan radius */
+  overflow: hidden;
+  height: 100%; /* Pastikan semua card memiliki tinggi yang sama */
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Untuk elemen seperti tombol Read More */
+  padding: 10px; /* Tambahkan padding di dalam kartu */
+}
+
+.favorite-books .card-img-top {
+  height: 120px; /* Sesuaikan tinggi gambar */
+  object-fit: contain; /* Gambar tetap contain */
+  margin: auto; /* Posisikan gambar di tengah */
+  display: block; /* Pastikan gambar sebagai elemen block */
+  border-radius: 8px; /* Tambahkan radius pada gambar */
+  background-color: #f8f9fa; /* Tambahkan background untuk area kosong */
+}
+
+.favorite-books .card-body {
+  padding: 10px; /* Tambahkan padding di bagian body card */
+  text-align: center; /* Pusatkan teks */
+}
+
+.favorite-books .card-title {
+  font-size: 14px; /* Ukuran teks judul */
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 5px; /* Tambahkan padding */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Tambahkan border */
+  border-radius: 8px; /* Radius untuk box title */
+  background-color: #ffffff; /* Warna background */
+}
+
+.favorite-books .readmore {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 10px; /* Tambahkan padding */
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color); /* Tambahkan border */
+  border-radius: 8px; /* Radius untuk tombol */
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.favorite-books .readmore:hover {
+  background-color: var(--accent-color); /* Warna background saat hover */
+  color: #ffffff; /* Warna teks saat hover */
+}
+
+.favorite-books .row {
+  gap: 10px; /* Kurangi jarak antar kartu */
+}
+
+/* Responsiveness untuk favorite-books */
+@media (max-width: 768px) {
+  .favorite-books .card-img-top {
+    height: 120px; /* Kurangi tinggi gambar untuk layar kecil */
+  }
+}
+
+
+.genres .features-item {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.genres .features-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.genres .features-item h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.genres .features-item i {
+  font-size: 20px;
+  color: #6c757d;
+}
+
+/* Custom Carousel Controls */
+.custom-carousel-prev,
+.custom-carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background: none;
+  border: none;
+  font-size: 2rem; /* Ukuran ikon */
+  color: var(--accent-color); /* Gunakan warna accent */
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.custom-carousel-prev:hover,
+.custom-carousel-next:hover {
+  color: var(--accent-color-hover); /* Warna saat hover */
+  transform: scale(2); /* Perbesar ikon saat hover */
+}
+
+.custom-carousel-prev i,
+.custom-carousel-next i {
+  pointer-events: none; /* Nonaktifkan klik pada ikon */
+}
+
+.custom-carousel-prev {
+  left: -30px; /* Posisi tombol kiri */
+}
+
+.custom-carousel-next {
+  right: 100px; /* Posisi tombol kanan */
+}
+
+.endbar {
+  border: var(--accent-color) solid 2px;
 }
